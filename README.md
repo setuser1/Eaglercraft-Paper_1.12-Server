@@ -1,78 +1,78 @@
+
 # Eaglercraft Server Setup
 
-This is a complete Eaglercraft server setup using BungeeCord as a proxy and Paper 1.12.2 as the backend server.
+This repository contains a portable Eaglercraft + Paper 1.12.2 server setup using BungeeCord as a proxy.
 
-## Structure
-```
-eaglercraft-server/
-├── bungee/           # BungeeCord proxy
-│   ├── BungeeCord.jar
+## Workspace Structure
+
+```text
+eaglercraft-portable/
+├── bungee/
 │   ├── config.yml
-│   ├── plugins/
-│   │   └── EaglerXServer.jar
+│   ├── start.sh
+│   └── plugins/
+│       └── EaglercraftXServer/
+│           ├── ice_servers.yml
+│           ├── listeners.yml
+│           └── ...
+├── paper/
+│   ├── eula.txt
+│   ├── server.properties
+│   ├── spigot.yml
 │   └── start.sh
-└── paper/            # Paper 1.12.2 server
-    ├── paper-1.12.2.jar
-    ├── server.properties
-    ├── spigot.yml
-    ├── eula.txt
-    └── start.sh
+└── web-serve/
+    ├── http-serve.py
+    └── index.html
 ```
 
 ## EaglerXServer Plugin
 
-✅ **Already installed!** The EaglerXServer v1.0.8 plugin has been downloaded and placed in the BungeeCord plugins folder.
-
-This plugin provides Eaglercraft support for:
-- EaglercraftX 1.8
-- Eaglercraft 1.12.2
-- Eaglercraft 1.5.2 clients
+The EaglerXServer plugin is already present under `eaglercraft-portable/bungee/plugins/EaglercraftXServer` and provides Eaglercraft compatibility for multiple client versions.
 
 ## How to Start
 
-### Step 1: Start the Paper Server
+Start the servers from the repository root or from your home directory. Example commands (adjust paths as needed):
+
+1. Start the Paper backend (wait until you see the server "Done" message):
+
 ```bash
-cd ~/Desktop/eaglercraft-server/paper
+cd ~/Desktop/Eaglercraft-Paper_1.12-Server/eaglercraft-portable/paper
 ./start.sh
 ```
-Wait for the server to fully start (you'll see "Done" message).
 
-### Step 2: Start BungeeCord
-In a new terminal:
+1. In a new terminal, start the BungeeCord proxy:
+
 ```bash
-cd ~/Desktop/eaglercraft-server/bungee
+cd ~/Desktop/Eaglercraft-Paper_1.12-Server/eaglercraft-portable/bungee
 ./start.sh
 ```
 
 ## Connecting
 
-### For Eaglercraft Clients:
-- Connect to: `ws://localhost:25565` or your server IP
-- Make sure to use the correct Eaglercraft client version that matches your plugin
+- For Eaglercraft clients: connect to `ws://<server-ip>:25565` (use WebSocket URL if required by your client).
+- For standard Minecraft 1.12.2 clients: connect to `<server-ip>:25565`.
 
-### For Regular Minecraft 1.12.2:
-- Connect to: `localhost:25565`
+Default ports used by this setup:
+
+- BungeeCord proxy: `25565`
+- Paper backend: `25566` (the Paper server is typically configured to run on a different port)
 
 ## Configuration
 
-### BungeeCord (port 25565)
-- Edit `bungee/config.yml` to configure the proxy
-- online-mode is set to false for Eaglercraft compatibility
+- Edit `eaglercraft-portable/bungee/config.yml` to change proxy settings (host, ports, online-mode).
+- Edit `eaglercraft-portable/paper/server.properties` and `spigot.yml` for backend settings; ensure BungeeCord/IP forwarding settings match your network.
 
-### Paper Server (port 25566)
-- Edit `paper/server.properties` for server settings
-- `spigot.yml` has bungeecord mode enabled for IP forwarding
+## Stopping the Servers
 
-## Stopping the Server
-
-Press `Ctrl+C` in each terminal or type `end` in the BungeeCord console.
+Press `Ctrl+C` in each terminal running the servers, or use the BungeeCord console command `end` to stop the proxy.
 
 ## Troubleshooting
 
-1. If ports are in use, edit the port numbers:
-   - BungeeCord: `bungee/config.yml` (host: 0.0.0.0:25565)
-   - Paper: `paper/server.properties` (server-port=25566)
+1. If ports are in use, change them in `bungee/config.yml` (proxy) and `paper/server.properties` (backend).
+2. Ensure Java is installed: run `java -version`.
+3. If you need more memory, edit the `start.sh` scripts to adjust JVM flags.
 
-2. Make sure Java is installed: `java -version`
+If you'd like, I can also:
 
-3. Adjust memory allocation in start.sh files if needed
+- update the start scripts with explicit `java -Xmx` settings
+- add a small `README` section showing how to install Java on Linux
