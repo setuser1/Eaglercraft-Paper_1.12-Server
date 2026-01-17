@@ -1,0 +1,55 @@
+disabled_commands:
+- disabledcommandhere
+player_limit: -1
+reject_transfers: false
+connection_throttle_limit: 3
+inject_commands: false
+prevent_proxy_connections: false
+connection_throttle: 4000
+network_compression_threshold: 256
+remote_ping_timeout: 5000
+remote_ping_cache: -1
+online_mode: false
+forge_support: false
+max_packets_per_second: 4096
+max_packets_data_per_second: 33554432
+listeners:
+- query_port: 25577
+  motd: '&3goonerbot_brandon made this!'
+  priorities:
+  - lobby
+  bind_local_address: true
+  host: 0.0.0.0:25565
+  max_players: 100
+  tab_size: 60
+  force_default_server: false
+  ping_passthrough: false
+  query_enabled: false
+  proxy_protocol: false
+  forced_hosts:
+    pvp.md-5.net: pvp
+  tab_list: GLOBAL_PING
+log_commands: false
+log_pings: true
+groups:
+  md_5:
+  - admin
+stats: 00000000-0000-0000-0000-000000000000
+servers:
+  lobby:
+    motd: '&1Lobby Server'
+    address: localhost:25566
+    restricted: false
+permissions:
+  default:
+  - bungeecord.command.server
+  - bungeecord.command.list
+  admin:
+  - bungeecord.command.alert
+  - bungeecord.command.end
+  - bungeecord.command.ip
+  - bungeecord.command.reload
+ip_forward: true
+enforce_secure_profile: false
+server_connect_timeout: 5000
+timeout: 30000
