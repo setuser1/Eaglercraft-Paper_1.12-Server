@@ -38,7 +38,7 @@ stats: 00000000-0000-0000-0000-000000000000
 servers:
   lobby:
     motd: '&1Lobby Server'
-    address: localhost:25566
+    address: localhost:1800
     restricted: false
 permissions:
   default:
